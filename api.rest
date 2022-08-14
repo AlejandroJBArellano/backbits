@@ -1,0 +1,51 @@
+###
+GET http://localhost:3000/ HTTP/1.1
+
+
+### 
+POST http://localhost:3000/user HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Prueba 1",
+    "email": "alejandro+test1@inpulse.mx"
+}
+
+### 
+POST http://localhost:3000/habit HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Tocar el chelo",
+    "description": "Cuerdas al aire, estudios de Dotzauer",
+    "userId": "62f83916918a55c6973b40b7"
+}
+
+###
+POST http://localhost:3000/publication HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Tocar el chelo",
+    "description": "Cuerdas al aire, estudios de Dotzauer",
+    "customProperties": [
+        {
+            "key": "Puntos a mejorar",
+            "value": "Estudios de Dotzauer"
+        }
+    ],
+    "rate": 10,
+    "userId": "62f83916918a55c6973b40b7",
+    "habitId": "62f83c55918a55c6973b40bd"
+}
+
+
+# {
+#   "name": "Prueba 1",
+#   "email": "alejandro+test1@inpulse.mx",
+#   "habitIds": [],
+#   "publicationIds": [],
+#   "_id": "62f83916918a55c6973b40b7",
+#   "createdAt": "2022-08-13T23:51:50.102Z",
+#   "updatedAt": "2022-08-13T23:51:50.102Z"
+# }
