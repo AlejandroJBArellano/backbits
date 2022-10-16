@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "title": "Tocar el chelo",
     "description": "Cuerdas al aire, estudios de Dotzauer",
-    "userId": "62f83916918a55c6973b40b7"
+    "userId": "631ab5ad5c606381baf74b34"
 }
 
 ###
@@ -34,9 +34,9 @@ Content-Type: application/json
             "value": "Estudios de Dotzauer"
         }
     ],
-    "rate": 10,
-    "userId": "62f83916918a55c6973b40b7",
-    "habitId": "62f83c55918a55c6973b40bd"
+    "rate": {{$randomInt 1 10}},
+    "userId": "631ab5ad5c606381baf74b34",
+    "habitId": "631ab5ce5c606381baf74b37"
 }
 
 
@@ -49,3 +49,6 @@ Content-Type: application/json
 #   "createdAt": "2022-08-13T23:51:50.102Z",
 #   "updatedAt": "2022-08-13T23:51:50.102Z"
 # }
+
+###
+GET http://localhost:3000/graphics/rating?userId=631ab5ad5c606381baf74b34 HTTP/1.1
