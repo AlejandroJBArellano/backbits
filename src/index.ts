@@ -14,7 +14,7 @@ app.set("port", process.env.PORT || 3000);
 app.use(cors({
     origin: process.env.PETITION,
 }));
-app.use(morgan("dev"));
+app.use(morgan(process.env.MORGAN_LOG as string));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
