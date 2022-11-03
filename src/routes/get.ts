@@ -20,9 +20,9 @@ const getRoutes = {
         res.json(user_publications);
     },
     graphicsRating: async (req: Request, res: Response) => {
-        const user_publication = await Publication.find({ userId: req.query.userId });
+        const user_publications = await Publication.find({ userId: req.query.userId, habitId: req.query.habitId });
         res.json({
-            user_rating: user_publication.map(publication => ({
+            user_rating: user_publications.map(publication => ({
                 publicationId: publication._id,
                 rate: publication.rate,
                 createdAt: publication.createdAt
