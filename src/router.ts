@@ -5,6 +5,7 @@ import postRoutes from "./routes/post";
 const router = Router();
 
 router.get("/", getRoutes.home);
+router.get("/user", getRoutes.userByQuery)
 router.get("/user/publications", getRoutes.userPublications);
 router.get("/user/publication", getRoutes.userPublication);
 router.get("/user/habit", getRoutes.userPublicationsByHabit);

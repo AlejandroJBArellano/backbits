@@ -1,11 +1,16 @@
 import { Request, Response } from "express";
 import { Habit } from "../schemas/Habits";
 import { Publication } from "../schemas/Publication";
+import { User } from "../schemas/User";
 
 const getRoutes = {
     home: async (req: Request, res: Response) => {
         const user_habits = await Habit.find({ userId: req.query.userId }).populate('publicationIds');
         res.json(user_habits);
+    },
+    userByQuery:async (req: Request, res: Response) => {
+        const user = await User.findOne(req.query);
+        res.json(user)
     },
     userPublications: async (req: Request, res: Response) => {
         const user_publications = await Publication.find({ userId: req.query.userId }).populate('publications');
