@@ -5,7 +5,16 @@ import { User } from "../schemas/User";
 
 const getRoutes = {
     home: async (req: Request, res: Response) => {
-        const user_habits = await Habit.find({ userId: req.query.userId }).populate('publicationIds');
+        const query: any = {}
+        Object.keys(req.query).forEach((key) => {
+            const value: string = req.query[key] as string;
+            if(value.length > 0){
+                const regexp = new RegExp(value,'i',);
+                console.log(regexp)
+                query[key] = regexp
+            }
+        })
+        const user_habits = await Habit.find({...query, userId: req.query.userId }).populate('publicationIds');
         res.json(user_habits);
     },
     userByQuery:async (req: Request, res: Response) => {
@@ -27,7 +36,7 @@ const getRoutes = {
     graphicsRating: async (req: Request, res: Response) => {
         const user_publications = await Publication.find({ userId: req.query.userId, habitId: req.query.habitId });
         res.json({
-            user_rating: user_publications.map(publication => ({
+                user_rating: user_publications.map(publication => ({
                 publicationId: publication._id,
                 rate: publication.rate,
                 createdAt: publication.createdAt

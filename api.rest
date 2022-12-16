@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "title": "Tocar el chelo",
     "description": "Cuerdas al aire, estudios de Dotzauer",
-    "userId": "631ab5ad5c606381baf74b34"
+    "userId": "639bf1864b8b42ff7cca22fd"
 }
 
 ###
@@ -52,3 +52,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/graphics/rating?userId=631ab5ad5c606381baf74b34 HTTP/1.1
+
+
+###
+GET http://localhost:3000/?title=to&userId=639bf1864b8b42ff7cca22fd HTTP/1.1
