@@ -36,7 +36,7 @@ const getRoutes = {
         });
     },
     findHabit: async (req: Request, res: Response) => {
-        const habit = await findHabit(req.query._id)
+        const habit = await findHabit(req.query._id as string)
         res.json(habit)
     }
 }
