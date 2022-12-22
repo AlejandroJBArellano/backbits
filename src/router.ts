@@ -10,6 +10,7 @@ router.get("/user/publications", getRoutes.userPublications);
 router.get("/user/publication", getRoutes.userPublication);
 router.get("/user/habit", getRoutes.userPublicationsByHabit);
 router.get("/graphics/rating", getRoutes.graphicsRating);
+router.get("/habit", getRoutes.findHabit)
 
 router.post("/publication", postRoutes.publication);
 router.post("/user", postRoutes.user);
