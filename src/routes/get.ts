@@ -1,15 +1,19 @@
+import { availableQueries } from './../schemas/Habits';
 import { Request, Response } from "express";
 import { Habit } from "../schemas/Habits";
 import { Publication } from "../schemas/Publication";
 import { User } from "../schemas/User";
+import { diacriticSensitiveRegex } from '../utils/diacriticSensitiveRegex';
 
 const getRoutes = {
     home: async (req: Request, res: Response) => {
         const query: any = {}
         Object.keys(req.query).forEach((key) => {
+            if (!(availableQueries.includes(key))) return 
             const value: string = req.query[key] as string;
             if(value.length > 0){
-                const regexp = new RegExp(value,'i',);
+                const newString = diacriticSensitiveRegex(value)
+                const regexp = new RegExp(newString,'i');
                 console.log(regexp)
                 query[key] = regexp
             }
