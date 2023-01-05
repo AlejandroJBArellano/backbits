@@ -8,7 +8,6 @@ export const createQueriesObject = (queries: { [key: string]: string; }, availab
         if(value.length > 0){
             const newString = diacriticSensitiveRegex(value)
             const regexp = new RegExp(newString,'i');
-            console.log(regexp)
             query[key] = regexp
         }
     })
