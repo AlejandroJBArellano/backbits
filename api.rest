@@ -1,7 +1,6 @@
 ###
 GET http://localhost:3000/ HTTP/1.1
 
-
 ### 
 POST http://localhost:3000/user HTTP/1.1
 Content-Type: application/json
@@ -16,12 +15,13 @@ POST http://localhost:3000/habit HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "Tocar el chelo",
+    "title": "Ordenar mi habitación",
     "description": "Cuerdas al aire, estudios de Dotzauer",
-    "userId": "631ab5ad5c606381baf74b34"
+    "userId": "639bf1864b8b42ff7cca22fd"
 }
 
 ###
+
 POST http://localhost:3000/publication HTTP/1.1
 Content-Type: application/json
 
@@ -52,3 +52,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/graphics/rating?userId=631ab5ad5c606381baf74b34 HTTP/1.1
+
+
+###
+GET http://localhost:3000/?title=habitacion&description=aire, estudios&userId=639bf1864b8b42ff7cca22fd HTTP/1.1

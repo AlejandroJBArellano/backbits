@@ -1,6 +1,9 @@
 import { model, Schema } from "mongoose";
 
-const HabitSchema = new Schema({
+export const habitAvailableQueries = ["title", "description"]
+
+const HabitSchema = new Schema(
+{
     title: {
         type: String,
         required: true,

@@ -1,16 +1,23 @@
 import { Request, Response } from "express";
-import { Habit } from "../schemas/Habits";
+import { Habit, habitAvailableQueries } from "../schemas/Habits";
+import { User, userAvailableQueries } from "../schemas/User";
 import { Publication } from "../schemas/Publication";
-import { User } from "../schemas/User";
-import { findHabit } from "./helpers/find";
+import { createQueriesObject } from '../utils/createQueriesObject';
+import { findHabit } from './helpers/find';
 
 const getRoutes = {
     home: async (req: Request, res: Response) => {
-        const user_habits = await Habit.find({ userId: req.query.userId }).populate('publicationIds');
+        const queries = req.query as { [key: string]: string; }
+        const query = createQueriesObject(queries, habitAvailableQueries)
+        if (req.query._id) { query["_id"] = req.query._id }        
+        const user_habits = await Habit.find({...query, userId: req.query.userId }).populate('publicationIds');
         res.json(user_habits);
     },
     userByQuery:async (req: Request, res: Response) => {
-        const user = await User.findOne(req.query);
+        const queries = req.query as { [key: string]: string; }
+        const  query = createQueriesObject(queries, userAvailableQueries)
+        if (req.query._id) { query["_id"] = req.query._id }   
+        const user = await User.findOne(query);
         res.json(user)
     },
     userPublications: async (req: Request, res: Response) => {
@@ -28,7 +35,7 @@ const getRoutes = {
     graphicsRating: async (req: Request, res: Response) => {
         const user_publications = await Publication.find({ userId: req.query.userId, habitId: req.query.habitId });
         res.json({
-            user_rating: user_publications.map(publication => ({
+                user_rating: user_publications.map(publication => ({
                 publicationId: publication._id,
                 rate: publication.rate,
                 createdAt: publication.createdAt
