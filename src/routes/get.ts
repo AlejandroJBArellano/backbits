@@ -1,28 +1,22 @@
-import { availableQueries } from './../schemas/Habits';
 import { Request, Response } from "express";
-import { Habit } from "../schemas/Habits";
+import { Habit, habitAvailableQueries } from "../schemas/Habits";
+import { User, userAvailableQueries } from "../schemas/User";
 import { Publication } from "../schemas/Publication";
-import { User } from "../schemas/User";
-import { diacriticSensitiveRegex } from '../utils/diacriticSensitiveRegex';
+import { createQueriesObject } from '../utils/createQueriesObject';
 
 const getRoutes = {
     home: async (req: Request, res: Response) => {
-        const query: any = {}
-        Object.keys(req.query).forEach((key) => {
-            if (!(availableQueries.includes(key))) return 
-            const value: string = req.query[key] as string;
-            if(value.length > 0){
-                const newString = diacriticSensitiveRegex(value)
-                const regexp = new RegExp(newString,'i');
-                console.log(regexp)
-                query[key] = regexp
-            }
-        })
+        const queries = req.query as { [key: string]: string; }
+        const query = createQueriesObject(queries, habitAvailableQueries)
+        if (req.query._id) { query["_id"] = req.query._id }        
         const user_habits = await Habit.find({...query, userId: req.query.userId }).populate('publicationIds');
         res.json(user_habits);
     },
     userByQuery:async (req: Request, res: Response) => {
-        const user = await User.findOne(req.query);
+        const queries = req.query as { [key: string]: string; }
+        const  query = createQueriesObject(queries, userAvailableQueries)
+        if (req.query._id) { query["_id"] = req.query._id }   
+        const user = await User.findOne(query);
         res.json(user)
     },
     userPublications: async (req: Request, res: Response) => {

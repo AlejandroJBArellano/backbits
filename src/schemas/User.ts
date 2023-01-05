@@ -1,5 +1,7 @@
 import { model, Schema } from "mongoose";
 
+export const userAvailableQueries = ["name", "email"]
+
 const UserSchema = new Schema({
     name: {
         type: String,
