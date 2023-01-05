@@ -1,12 +1,16 @@
+import cors from "cors";
 import * as dotenv from "dotenv";
 import express from "express";
+import * as firebaseAdmin from "firebase-admin";
 import morgan from "morgan";
 import router from "./router";
-import cors from "cors";
 
 dotenv.config();
 
 const app = express();
+firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert(require("../firebase.json"))
+})
 import("./database");
 
 app.set("port", process.env.PORT || 3000);
