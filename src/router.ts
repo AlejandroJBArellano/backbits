@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { appCheckVerification } from "./middleweares";
 import getRoutes from "./routes/get";
 import postRoutes from "./routes/post";
 
@@ -12,9 +13,9 @@ router.get("/user/habit", getRoutes.userPublicationsByHabit);
 router.get("/graphics/rating", getRoutes.graphicsRating);
 router.get("/habit", getRoutes.findHabit)
 
-router.post("/publication", postRoutes.publication);
+router.post("/publication", [appCheckVerification], postRoutes.publication);
 router.post("/user", postRoutes.user);
-router.post("/habit", postRoutes.habit);
+router.post("/habit", [appCheckVerification], postRoutes.habit);
 
 router.put("/publication", postRoutes.publication);
 router.put("/user", postRoutes.user);
