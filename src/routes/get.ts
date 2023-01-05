@@ -3,6 +3,7 @@ import { Habit, habitAvailableQueries } from "../schemas/Habits";
 import { User, userAvailableQueries } from "../schemas/User";
 import { Publication } from "../schemas/Publication";
 import { createQueriesObject } from '../utils/createQueriesObject';
+import { findHabit } from './helpers/find';
 
 const getRoutes = {
     home: async (req: Request, res: Response) => {
@@ -40,6 +41,10 @@ const getRoutes = {
                 createdAt: publication.createdAt
             })),
         });
+    },
+    findHabit: async (req: Request, res: Response) => {
+        const habit = await findHabit(req.query._id as string)
+        res.json(habit)
     }
 }
 
