@@ -8,6 +8,7 @@ const postRoutes = {
     publication: async (req: Request, res: Response) => {
         const habit = await findHabit(req.body.habitId);
         const user = await findUser(req.body.userId);
+     try{ 
         /* 
          body = {
             title: string,
@@ -54,8 +55,12 @@ const postRoutes = {
         user.publicationIds.push(publication.id);
         await user.save();
         res.json(publication);
+    }catch(error){
+        return error
+    }
     },
     user: async (req: Request, res: Response) => {
+       try{ 
         /* 
          body = {
             name: string,
@@ -69,8 +74,12 @@ const postRoutes = {
         });
         await user.save();
         res.json(user);
+    }catch(error){
+        return error
+    }
     },
     habit: async (req: Request, res: Response) => {
+        
         /* 
          body = {
             title: string,
@@ -89,5 +98,7 @@ const postRoutes = {
     }
 
 }
+
+
 
 export default postRoutes;

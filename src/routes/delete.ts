@@ -4,21 +4,30 @@ import { findHabit, findPublication, findUser } from "./helpers/find";
 const deleteRoutes = {
     publication: async (req: Request, res: Response) => {
         const { id } = req.params;
-        const publication = await findPublication(id);
-        if (!publication) {
-            res.status(404).json({
-                message: "Publication not found"
-            });
-            return;
-        } else {
-            await publication.remove();
-            res.status(200).json({
-                message: "Publication deleted"
-            });
+        try{
+            const publication = await findPublication(id);
+            if (!publication) {
+                res.status(404).json({
+                    message: "Publication not found"
+                });
+                return;
+            } else {
+                await publication.remove();
+                res.status(200).json({
+                    message: "Publication deleted"
+                });
+            }
+    
+
+        }catch(error){
+          return error
+          
+
         }
-    },
+           },
     user: async (req: Request, res: Response) => {
         const { id } = req.params;
+    try{ 
         const user = await findUser(id);
         if(!user) {
             res.status(400).json({
@@ -30,9 +39,13 @@ const deleteRoutes = {
         res.status(200).json({
             message: "User deleted"
         });
+    }catch(error){
+        return error
+    }
     },
     habit: async (req: Request, res: Response) => {
         const { id } = req.params;
+        
         const habit = await findHabit(id);
         if(!habit) {
             res.status(400).json({
@@ -44,5 +57,7 @@ const deleteRoutes = {
         res.status(200).json({
             message: "Habit deleted"
         });
-    }
+    },
+
+    
 }
