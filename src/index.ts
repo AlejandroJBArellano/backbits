@@ -3,11 +3,13 @@ import express from "express";
 import morgan from "morgan";
 import router from "./router";
 import cors from "cors";
+import helmet from "helmet";
 
 dotenv.config();
 
 const app = express();
 import("./database");
+app.use (helmet())
 
 app.set("port", process.env.PORT || 3000);
 
@@ -21,4 +23,11 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 // app.use("/", (req,res) => res.json({ message: "Hello World" }));
 app.use(router)
 
+
+
+
 app.listen(app.get("port"), () => console.log(`Server on port ${app.get("port")}`));
+
+
+  
+  
