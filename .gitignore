@@ -10,6 +10,9 @@ dist/
 src/environment.ts
 .env
 
+#firebase files
+firebase.json
+
 # Compiled Java class files
 *.class
 

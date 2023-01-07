@@ -1,8 +1,11 @@
 import { Router } from "express";
+import { appCheckVerification } from "./middleweares";
 import getRoutes from "./routes/get";
 import postRoutes from "./routes/post";
 
 const router = Router();
+
+router.use([appCheckVerification])
 
 router.get("/", getRoutes.home);
 router.get("/user", getRoutes.userByQuery)
