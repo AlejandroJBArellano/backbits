@@ -15,6 +15,8 @@ const verifyAppCheckToken = async (appCheckToken: string) => {
 export const appCheckVerification = async (req: Request, res: Response, next: NextFunction) => {
     const appCheckClaims = await verifyAppCheckToken(req.header("X-Firebase-AppCheck") || '')
 
+    console.log("appCheckToken", appCheckClaims?.token)
+
     if(!appCheckClaims){
         res.status(401)
         return next("Unauthorized")

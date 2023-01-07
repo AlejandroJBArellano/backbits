@@ -3,12 +3,12 @@ GET http://localhost:3000/ HTTP/1.1
 
 
 ### 
-POST http://localhost:3000/user HTTP/1.1
+POST http://localhost:3000/user HTTP/1.1a
 Content-Type: application/json
 
 {
     "name": "Prueba 1",
-    "email": "alejandro+test1@inpulse.mx"
+    "email": "holamundo@gmail.com"
 }
 
 ### 

@@ -5,6 +5,8 @@ import postRoutes from "./routes/post";
 
 const router = Router();
 
+router.use([appCheckVerification])
+
 router.get("/", getRoutes.home);
 router.get("/user", getRoutes.userByQuery)
 router.get("/user/publications", getRoutes.userPublications);
@@ -13,9 +15,9 @@ router.get("/user/habit", getRoutes.userPublicationsByHabit);
 router.get("/graphics/rating", getRoutes.graphicsRating);
 router.get("/habit", getRoutes.findHabit)
 
-router.post("/publication", [appCheckVerification], postRoutes.publication);
+router.post("/publication", postRoutes.publication);
 router.post("/user", postRoutes.user);
-router.post("/habit", [appCheckVerification], postRoutes.habit);
+router.post("/habit", postRoutes.habit);
 
 router.put("/publication", postRoutes.publication);
 router.put("/user", postRoutes.user);
