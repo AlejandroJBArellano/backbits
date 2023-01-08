@@ -3,11 +3,12 @@ import { findHabit, findPublication, findUser } from "./helpers/find";
 
 export const putRoutes = {
     publication: async (req: Request, res: Response) => {
+        try{
         const { id } = req.params;
         const publication = await findPublication(id);
         const user = await findUser(req.body.userId);
         const habit = await findHabit(req.body.habitId);
-        try{ 
+         
         if(!user) {
             res.status(400).json({
                 message: "User not found"
@@ -31,14 +32,16 @@ export const putRoutes = {
             await publication.save();
             res.status(200).send(publication);
         }
-    }catch(error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     user: async (req: Request, res: Response) => {
+        try{
         const { id } = req.params;
         const user = await findUser(id);
-        try{ 
+         
         if(!user) {
             res.status(400).json({
                 message: "User not found"
@@ -49,9 +52,10 @@ export const putRoutes = {
         user.email = req.body.email;
         await user.save();
         res.json(user);
-    }catch(error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     habit: async (req: Request, res: Response) => {
         const { id } = req.params;

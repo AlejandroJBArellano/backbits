@@ -10,41 +10,45 @@ const getRoutes = {
         try{ 
         const user_habits = await Habit.find({ userId: req.query.userId }).populate('publicationIds');
         res.json(user_habits);
-    }catch(error){
-        return error
-    }
-    },
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
+        },
     userByQuery:async (req: Request, res: Response) => {
         try{ 
         const user = await User.findOne(req.query);
         res.json(user)
-    }catch(error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     userPublications: async (req: Request, res: Response) => {
         try{ 
         const user_publications = await Publication.find({ userId: req.query.userId }).populate('publications');
         res.json(user_publications);
-    }catch(error){
-        return error
-    }
-    },
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }    },
     userPublication: async (req: Request, res: Response) => {
         try{ 
         const user_publication = await Publication.findById(req.query.pid);
         res.json(user_publication);
-    }catch (error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     userPublicationsByHabit: async (req: Request, res: Response) => {
         try{ 
         const user_publications = await Publication.find({ habitId: req.query.hid });
         res.json(user_publications);
-    }catch(error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     graphicsRating: async (req: Request, res: Response) => {
         try{ 
@@ -56,9 +60,10 @@ const getRoutes = {
                 createdAt: publication.createdAt
             })),
         });
-    }catch(error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     findHabit: async (req: Request, res: Response) => {
         

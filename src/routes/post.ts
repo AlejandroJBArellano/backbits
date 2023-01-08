@@ -6,9 +6,10 @@ import { findHabit, findUser } from "./helpers/find";
 
 const postRoutes = {
     publication: async (req: Request, res: Response) => {
+        try{ 
+     
         const habit = await findHabit(req.body.habitId);
         const user = await findUser(req.body.userId);
-     try{ 
         /* 
          body = {
             title: string,
@@ -55,9 +56,10 @@ const postRoutes = {
         user.publicationIds.push(publication.id);
         await user.save();
         res.json(publication);
-    }catch(error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     user: async (req: Request, res: Response) => {
        try{ 
@@ -74,9 +76,10 @@ const postRoutes = {
         });
         await user.save();
         res.json(user);
-    }catch(error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     habit: async (req: Request, res: Response) => {
         

@@ -19,11 +19,10 @@ const deleteRoutes = {
             }
     
 
-        }catch(error){
-          return error
-          
-
-        }
+        }catch(error) {
+                res.status(500).json(error)
+                return;
+              }
            },
     user: async (req: Request, res: Response) => {
         const { id } = req.params;
@@ -39,9 +38,10 @@ const deleteRoutes = {
         res.status(200).json({
             message: "User deleted"
         });
-    }catch(error){
-        return error
-    }
+    }catch(error) {
+        res.status(500).json(error)
+        return;
+      }
     },
     habit: async (req: Request, res: Response) => {
         const { id } = req.params;
